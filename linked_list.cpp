@@ -273,26 +273,33 @@ void deletionByValueDuplicate(Node *&head, int target)
     }
 }
 
-Node *reverseNonRecursive(Node *&head)
+Node *reverseListNonRecursive(Node *&head)
 {
-    Node *prev = NULL;
-    Node *current = head;
-    if (head == NULL)
+    if (head == NULL || head->Next == NULL)
     {
-        cout << "The Linked List is Empty" << endl;
-        return head;
+        if (head == NULL)
+        {
+            cout << "There is no value to reverse!" << endl;
+            return head;
+        }
+        else
+        {
+            return head;
+        }
     }
-    Node *next = head->Next;
-    while (true)
+    Node *prevNode = head;
+    Node *currNode = head->Next;
+    while (currNode != NULL)
     {
-        current->Next = prev;
-        prev = current;
-        current = next;
-        if (current == NULL)
-            break;
-        next = next->Next;
+        Node *nextNode = currNode->Next;
+        currNode->Next = prevNode;
+
+        // Update
+        prevNode = currNode;
+        currNode = nextNode;
     }
-    return prev;
+    head->Next = NULL;
+    return prevNode;
 }
 
 int main()
@@ -421,7 +428,7 @@ int main()
             deletionByValueDuplicate(head, delValue);
             break;
         case 13:
-            head = reverseNonRecursive(head);
+            head = reverseListNonRecursive(head);
             break;
 
         default:
