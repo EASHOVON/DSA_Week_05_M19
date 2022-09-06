@@ -36,7 +36,7 @@ void deletionAtSpecificPosition(Node *&head, int pos);
 void deletionByValueUnique(Node *&head, int target);
 void deletionByValueDuplicate(Node *&head, int target);
 Node *reverseNonRecursive(Node *&head);
-
+Node *reverseListRecursive(Node *&head);
 // Function Making
 void display(Node *n)
 {
@@ -302,6 +302,29 @@ Node *reverseListNonRecursive(Node *&head)
     return prevNode;
 }
 
+Node *reverseListRecursive(Node *&head)
+{
+    if (head == NULL || head->Next == NULL)
+    {
+        if (head == NULL)
+        {
+            cout << "The Linked List is Empty!" << endl;
+            return head;
+        }
+        else
+        {
+            return head;
+        }
+    }
+    else
+    {
+        Node *newHead = reverseListRecursive(head->Next);
+        head->Next->Next = head;
+        head->Next = NULL;
+        return newHead;
+    }
+}
+
 int main()
 {
     Node *head = NULL;
@@ -319,6 +342,7 @@ int main()
          << "Choice 11: Deletion by value (Unique List)" << endl
          << "Choice 12: Deletion by value (Duplication Enabled List)" << endl
          << "Choice 13: Reversal of List Non-Recursive" << endl
+         << "Choice 14: Reversal of List Recursive" << endl
          << "Choice 0: Exit" << endl
          << endl;
     cout << "Next Choice: ";
@@ -429,6 +453,9 @@ int main()
             break;
         case 13:
             head = reverseListNonRecursive(head);
+            break;
+        case 14:
+            head = reverseListRecursive(head);
             break;
 
         default:
