@@ -32,6 +32,25 @@ void insertAtHead(doublyNode *&head, int val)
     newNode->Next = head;
     head = newNode;
 }
+
+void insertAtTail(doublyNode *&head, int val)
+{
+    doublyNode *newNode = new doublyNode(val);
+    if (head == NULL)
+    {
+        head = newNode;
+        return;
+    }
+
+    doublyNode *temp = head;
+    while (temp->Next != NULL)
+    {
+        temp = temp->Next;
+    }
+    temp->Next = newNode;
+    newNode->Prev = temp;
+}
+
 int main()
 {
     doublyNode *head = NULL;
